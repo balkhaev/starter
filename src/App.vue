@@ -1,3 +1,13 @@
+<style>
+  html, body {
+    overflow: hidden;
+  }
+  body {
+    background-image: url("assets/bg-2.jpg");
+    background-size: cover;
+  }
+</style>
+
 <template>
   <v-content>
     <site-list :items="sites" :addItem="addSite" />
@@ -8,7 +18,6 @@
 import SiteList from './components/SiteList.vue'
 
 const sitesKey = 'sites';
-const isDomain = /^((?!-))(xn--)?[a-z0-9][a-z0-9-_]{0,61}[a-z0-9]?\.(xn--)?([a-z0-9-]{1,61}|[a-z0-9-]{1,30}\.[a-z]{2,})$/;
 
 export default {
   name: 'app',
@@ -20,7 +29,7 @@ export default {
   }),
   methods: {
     addSite(site) {
-      if (isDomain.test(site)) {
+      if (!site.startsWith('http')) {
         site = 'http://' + site;
       }
 
